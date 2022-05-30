@@ -1,0 +1,34 @@
+{% extends "painel.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('aluno.static', filename='css/aluno.css')}}">
+{% endblock %}
+
+{% block page %}
+<div class="table">
+    <div class="tr th">
+        <div class="td" id="user_id">ID</div>
+        <div class="td">Nome</div>
+        <div class="td">CPF</div>
+        <div class="td">Data Nascimento</div>
+        <div class="td" style="flex-grow: 2;">Ações</div>
+    </div>
+    <div class="tr">
+        <div class="td" style=" justify-content: center;">1</div>
+        <div class="td" style="justify-content: center;">José Elias Gomes de Lima</div>
+        <div class="td" style="justify-content: center;">79798065453</div>
+        <div class="td" style="justify-content: center;">11/06/1969</div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">edit</i>Edita</div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">delete</i>Deleta</div>
+    </div>
+    <div class="tr">
+        <div class="td" style=" justify-content: center;">1</div>
+        <div class="td" style="justify-content: center;">José Elias Gomes de Lima</div>
+        <div class="td" style="justify-content: center;">79798065453</div>
+        <div class="td" style="justify-content: center;">11/06/1969</div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">edit</i>Edita</div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">delete</i>Deleta</div>
+    </div>
+</div>
+
+{% endblock %}

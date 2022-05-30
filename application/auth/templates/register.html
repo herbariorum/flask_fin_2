@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+    Register
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}">
+{% endblock %}
+{% block body %}
+    <form method="post" class="log-in-form">
+        <img src="{{ url_for('static', filename='images/avatar-svgrepo-com.svg') }}">
+        <h3>Cadastro</h3>
+        <input type="text" name="username" id="username" value="{{ request.form.username }}" placeholder="digite o nome de usuário">
+        <input type="email" name="email" id="email" value="{{ request.form.email }}" placeholder="digite o email">
+        <input type="password" name="password" id="password" value="{{ request.form.password}}" placeholder="digite a senha de usuário">
+        <input type="submit" value="Validar" class="submit">
+    </form>
+    
+{% endblock %}

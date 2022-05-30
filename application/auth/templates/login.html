@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}
+    Login
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('auth.static', filename='css/login.css')}}">
+{% endblock %}
+{% block body %}    
+    <form class="log-in-form"  method="post">
+        <img src="{{ url_for('auth.static', filename='images/avatar-svgrepo-com.svg')}}">
+        <h3>Login</h3>
+        
+        <input type="email" name="email" id="email" value="{{ request.form.email }}" placeholder="example@email.com">
+        <input type="password" name="password" id="password" value="{{ request.form.password}}">
+        
+        <input type="submit" value="Verificar" class="submit">
+    </form>
+{% endblock %}
