@@ -13,8 +13,5 @@ def painel():
 @admin.route("/aluno")
 @login_required
 def aluno():
-    logado = True
-    if logado:
-        return redirect(url_for('aluno.index'))
-    return render_template('painel.html')
+    return render_template('admin/aluno/index.html')
     

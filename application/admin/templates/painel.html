@@ -8,36 +8,29 @@
 </head>
 <title>{% block title %}{% endblock %}</title>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}        
-        {% for category, message in messages %}
-        <div class="alert {{ category }}">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-            <strong>Error! </strong>{{ message }}
-        </div> 
-        {% endfor %}   
-    {% endif %}
-{% endwith %}
-
 {% block body %}
-    <!-- 
-    <h1>Painel</h1>
-    <h4>ID do Usuário: {{ session['user_id'] }}</h4>
-    <h4>Email do Usuário: {{ session['email'] }}</h4>
-    <h4>Nome do Usuário: {{ session['username'] }}</h4>
-    {% if session['username'] %}
-        <a href="{{ url_for('auth.register') }}">Cadastre novo usuário</a> <br>
-        <a href="{{ url_for('auth.logout')}}">Logout</a>
-    {% endif %} -->
+
+<!-- https://www.askpython.com/python-modules/flask/flask-crud-application -->
 <main>
     {% include 'partials/_header.html' %}
     <app>
         {% include 'partials/_navbar.html' %}        
         <article>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}        
+                    {% for category, message in messages %}
+                    <div class="alert {{ category }}">
+                        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                        <strong class="titulo_msg">{{ category|capitalize }}! </strong> {{ message }}
+                    </div> 
+                    {% endfor %}   
+                {% endif %}
+            {% endwith %}
             {% block page %}{% endblock%}    
         </article>        
     </app>
 </main>
 {% endblock %}
 
-{% block script %}{% endblock%}
+{% block script %}
+{% endblock%}

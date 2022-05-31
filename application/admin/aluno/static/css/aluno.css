@@ -46,3 +46,48 @@
     white-space: nowrap;
     border-bottom: 1px solid #d0d0d0;
 }
+
+
+.pagination {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    column-gap: 2px;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    text-decoration: none;
+} 
+
+.pagination a:hover:not(.active) {
+    background-color: #031F3B;
+    color: white;
+}
+
+/* a:nth-child(5){
+    background-color: green;
+    color: white;
+} */
+
+a:nth-child(1) {
+    font-weight: bold;
+}
+a:nth-child(7) {
+    font-weight: bold;
+}
+
+ /* formulario */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.cancela {
+    text-decoration: none;
+}
