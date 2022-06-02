@@ -1,15 +1,14 @@
 from dateutil.parser import *
 from datetime import datetime
-
-def datefilter(data, fmt=None):
-    if isinstance(data, str):
-        data = parse(data)
-    else:        
-        data = data
-    
-    native = data.replace(datetime.tzinfo==None)
-    format = '%d/%m/%Y'
-    return native.strftime(format)
+from .uteis import Uteis
 
 
+def cpffilter(data):
+    cpf = '{}.{}.{}-{}'.format(data[:3], data[3:6], data[6:9], data[9:])
+    return cpf
+
+
+def format_strit_to_data(data):
+    ret = data.strftime('%d %m %Y')
+    return ret
 

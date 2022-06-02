@@ -1,93 +1,36 @@
-.table {
+.btn_new {
+    margin-left: auto;
+}
+
+.toolbar {
+    float: right;
+    text-align: right;
+    padding-bottom: 15px;
+}
+
+/* dataTable */
+.dataTables_wrapper .dataTables_filter {
+    float: left !important;
+    /* padding-bottom: 15px; */
+}
+.dataTables_filter input {
+    border-radius: 15px !important;
+    min-width: 400px;
+    padding-left: 10px !important;
+}
+
+ .btn-new {
     display: flex;
-    flex-flow: column nowrap;
-    font-size: .8rem;
-    margin: 0.5rem;
-    line-height: 1.5;
-    border-bottom: 1px solid #d0d0d0;
-    flex: 1 1 auto;
-}
-
-.th {
-    display: none;
-    font-weight: 700;
-    background-color: #f2f2f2;
-}
-
-.th > .td {
-    white-space: normal;
     justify-content: center;
-}
-
-.tr {
-    width: 100%;
-    display: flex;
-    flex-flow: row nowrap;
-}
-
-.tr:nth-of-type(even){
-    background-color: #f2f2f2;
-}
-
-.tr:nth-of-type(odd){
-    background-color: #ffffff;
-}
-
-.td {
-    display: flex;
-    flex-flow: row nowrap;
-    flex-grow: 1;
-    flex-basis: 0;
-    padding: 0.5em;
-    word-break: break-word;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0px;
-    white-space: nowrap;
-    border-bottom: 1px solid #d0d0d0;
-}
-
-
-.pagination {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    column-gap: 2px;
-}
-
-.pagination a {
-    color: black;
-    float: left;
     text-decoration: none;
-} 
-
-.pagination a:hover:not(.active) {
-    background-color: #031F3B;
-    color: white;
+    border-radius: 15px;
 }
 
-/* a:nth-child(5){
-    background-color: green;
-    color: white;
-} */
 
-a:nth-child(1) {
-    font-weight: bold;
-}
-a:nth-child(7) {
-    font-weight: bold;
-}
+.material-icons.md-light { color: #ffffff; }
+.material-icons.md-light.md-24 { font-size: 24px; }
+.material-icons.md-light.md-18 { font-size: 18px; }
 
- /* formulario */
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.cancela {
+a {
     text-decoration: none;
 }

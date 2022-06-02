@@ -1,0 +1,35 @@
+.alert.error {
+    background-color: #f44336;
+}
+
+.alert.info {
+    background-color: #2196F3;
+}
+
+.alert.success {
+    background-color: #04AA6D;;
+}
+
+.alert.warning {
+    background-color: #ff9800;
+}
+
+.titulo_msg {
+    padding-right: 15px;
+}
+
+.closebtn {
+    margin-left: 15px;
+    padding-right: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+}

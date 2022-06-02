@@ -1,47 +1,79 @@
 {% extends "painel.html" %}
-{% import '_pagination.html' as f %}
+
 
 {% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('admin.static', filename='css/datatables.min.css')}}">
 <link rel="stylesheet" href="{{ url_for('aluno.static', filename='css/aluno.css')}}">
 {% endblock %}
-{% block title %}Painel::Aluno{% endblock%}
+{% block title %}{{ title }}{% endblock%}
+
 {% block page %}
-
-<div class="table">
-    <div class="tr th">
-        <div class="td">ID</div>
-        <div class="td">Nome</div>
-        <div class="td">CPF</div>
-        <div class="td">Data Nascimento</div>
-        <div class="td" style="flex-grow: 2;">Ações</div>
-    </div>
-    {% for row in rows.items %}
-    <div class="tr">
-        <div class="td" style=" justify-content: center;" id="{{ row.id }}">{{ row.id }}</div>
-        <div class="td" style="justify-content: center;">{{ row.nome }}</div>
-        <div class="td" style="justify-content: center;">{{row.cpf }}</div>
-        <div class="td" style="justify-content: center;">{{ row.nascimento.strftime('%d/%m/%Y') }}</div>
-        <div class="td" style="justify-content: center;"><i class="material-icons">edit</i><a href="{{ url_for('aluno.edit', id=row.id) }}">Edita</a></div>
-        <div class="td" style="justify-content: center;"><i class="material-icons">delete</i><a href="{{ url_for('aluno.delete', id=row.id) }}">Deleta</a></div>
-    </div>
-    {% endfor %}
-
+<table id="data" class="table table-hover">
     
-</div>
-<div class="pagination">
-    {% if rows.has_prev %}<a href="{{ url_for('aluno.index', pages=rows.prev_num) }}">&laquo; Prev</a>{% else %}&laquo; Prev{% endif %} |
-    
-    {% for page_num in rows.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
-        {% if page_num %}
-            {% if rows.page == page_num %}
-                <a href="{{ url_for('aluno.index', pages=page_num)}}"> {{ page_num }}</a>
-            {% else %}
-                <a href="{{ url_for('aluno.index', pages=page_num)}}"> {{ page_num }}</a>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
-    
-    {% if rows.has_next %}<a href="{{ url_for('aluno.index', pages=rows.next_num) }}">Next &raquo;</a>{% else %}Next &raquo;{% endif %}
-</div>
+    <thead class="table-dark">
+        <tr>
+            <th >ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Data Nascimento</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <td >{{row.id}}</td>
+                <td><a href="{{ url_for('aluno.view', id=row.id)}}">{{row.nome|title}}</a></td>
+                <td>{{ row.cpf}}</td>
+                <td>{{ row.nascimento.strftime('%d/%m/%Y') }}</td>
+                <td>
+                    <div class="d-flex ms-auto">
+                        <a href="{{ url_for('aluno.edit', id=row.id)}}" class="btn btn-secondary" style="height: 32px;"  data-toggle="tooltip" data-placement="top" title="Edita">
+                            <i class="material-icons  md-light md-18">edit</i>
+                        </a>
+                        <a href="{{ url_for('aluno.delete', id=row.id) }}" class="btn btn-danger" style="height: 32px; margin-left: 15px;"  data-toggle="tooltip" data-placement="top" title="Delete">
+                            <i class="material-icons  md-light md-18">delete</i>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+
+<script src="{{ url_for('admin.static', filename='js/jquery.dataTables.min.js')}}"></script>
+<script src="{{ url_for('admin.static', filename='js/dataTables.buttons.min.js')}}"></script>
+<script src="{{ url_for('admin.static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    $('#data').DataTable({
+        info: false,
+    
+        columnDefs: [
+            {
+                target: 3,
+                searchable: false,
+            },
+            {
+                target:0,
+                visible: false
+            }
+        ],
+        // dom: 'Bfrtip',
+        dom: '<"toolbar">frtip'
+        });
+
+        $('div.toolbar').html("<a class='btn btn-primary btn-new' href={{ url_for('aluno.new') }}><i class='material-icons md-light md-24'>add</i>Cadastrar Novo</a>")
+</script>
 {% endblock %}

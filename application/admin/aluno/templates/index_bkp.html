@@ -1,0 +1,77 @@
+{% extends "painel.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('aluno.static', filename='css/aluno.css')}}">
+{% endblock %}
+{% block title %}Painel::Aluno{% endblock%}
+{% block page %}
+
+<div class="box">
+    <div class="search_txt" style="border: 1px solid #dddddd;">
+        <span class="material-icons">search</span>    
+        <input type="text" name="input_search" id="search" style="border: none;" placeholder="entre um nome para pesquisa">
+
+    </div >
+    <div class="btn_new">
+        <a href="{{ url_for('aluno.new') }}" >
+            <i class="material-icons md-light md-24">add</i>Cadastrar Novo
+        </a>
+    </div>
+</div>
+
+<div class="table">
+    <div class="tr th">
+        <div class="td" style="display: none;">ID</div>
+        <div class="td">Nome</div>
+        <div class="td">CPF</div>
+        <div class="td">Data Nascimento</div>
+        <div class="td" style="flex-grow: 2;">Ações</div>
+    </div>
+    {% for row in rows.items %}
+    <div class="tr">
+        <div class="td" style=" justify-content: center; display: none;" id="{{ row.id }}">{{ row.id }}</div>
+        <div class="td" style="justify-content: left;"><a href="{{ url_for('aluno.view', id=row.id)}}">{{ row.nome|title }}</a></div>
+        <div class="td" style="justify-content: center;">{{row.cpf|cpffilter }}</div>
+        <div class="td" style="justify-content: center;">{{ row.nascimento.strftime('%d/%m/%Y') }}</div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">edit</i><a href="{{ url_for('aluno.edit', id=row.id) }}">Edita</a></div>
+        <div class="td" style="justify-content: center;"><i class="material-icons">delete</i><a href="{{ url_for('aluno.delete', id=row.id) }}">Deleta</a></div>
+    </div>
+    {% endfor %}
+
+    
+</div>
+<div class="pagination">
+    {% if rows.has_prev %}<a href="{{ url_for('aluno.index', pages=rows.prev_num) }}">&laquo; Prev</a>{% else %}&laquo; Prev{% endif %} |
+    
+    {% for page_num in rows.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+        {% if page_num %}
+            {% if rows.page == page_num %}
+                <a href="{{ url_for('aluno.index', pages=page_num)}}"> {{ page_num }}</a>
+            {% else %}
+                <a href="{{ url_for('aluno.index', pages=page_num)}}"> {{ page_num }}</a>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    
+    {% if rows.has_next %}<a href="{{ url_for('aluno.index', pages=rows.next_num) }}">Next &raquo;</a>{% else %}Next &raquo;{% endif %}
+</div>
+
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script>
+    $("#search").keyup(function(){
+        var valor = $("#search").val()
+        $.ajax({
+            url: "{{ url_for('aluno.search') }}",
+            type: 'GET',
+            data: {"query": valor },
+            success: function(retorno){
+                
+            }
+        });
+    })
+</script>
+{% endblock %}

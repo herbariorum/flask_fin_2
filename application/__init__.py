@@ -1,7 +1,10 @@
 from flask import Flask
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from .filter.filter import cpffilter, format_strit_to_data
 
 db = SQLAlchemy()
+mg = Migrate()
 
 
 def create_app():
@@ -9,9 +12,12 @@ def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('../config.py')
 
+    app.add_template_filter(cpffilter)
+    app.add_template_filter(format_strit_to_data)
 
     db.init_app(app)    
-
+    mg.init_app(app, db)
+    
     from application.auth.auth import auth
     app.register_blueprint(auth, url_prefix='/auth')
     

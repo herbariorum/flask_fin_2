@@ -4,13 +4,14 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/painel.css')}}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/alert.css')}}">
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename='css/bootstrap.min.css')}}">
     {% block head %}{% endblock %}
 </head>
 <title>{% block title %}{% endblock %}</title>
 
 {% block body %}
 
-<!-- https://www.askpython.com/python-modules/flask/flask-crud-application -->
 <main>
     {% include 'partials/_header.html' %}
     <app>
@@ -33,4 +34,11 @@
 {% endblock %}
 
 {% block script %}
+<script src="{{ url_for('admin.static', filename='js/jquery-3.6.0.min.js')}}"></script>
+
+<script>
+    setTimeout(function(){
+        $(".alert").hide()
+    }, 2000);
+</script>
 {% endblock%}

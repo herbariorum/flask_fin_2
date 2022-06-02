@@ -1,0 +1,10 @@
+{% extends "painel.html" %}
+{% import '_pagination.html' as f %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('aluno.static', filename='css/aluno.css')}}">
+{% endblock %}
+{% block title %}Painel::Aluno{% endblock%}
+{% block page %}
+<p>{{ user_id }}</p>
+{% endblock %}

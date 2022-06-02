@@ -15,3 +15,8 @@ def painel():
 def aluno():
     return render_template('admin/aluno/index.html')
     
+@admin.route("/profile")
+@login_required
+def profile():
+    id = session['user_id']
+    return render_template('profile.html', user_id = id)

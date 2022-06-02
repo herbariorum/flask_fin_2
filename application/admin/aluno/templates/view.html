@@ -1,0 +1,31 @@
+{% extends "painel.html" %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('aluno.static', filename='css/aluno.css')}}">
+{% endblock %}
+{% block title %}Painel::Aluno{% endblock%}
+{% block page %}
+    <div class="info_view">
+        <a href="{{ url_for('aluno.index')}}" class="cancela"><span class="material-icons">
+            arrow_back
+            </span></a>
+        <h3>Informações do Aluno</h3>
+        
+    </div>
+    <hr>
+    <div class="view_data">
+        <table>
+            <tr>
+                <td style="padding-right : 15px;">Nome do Aluno:</td><td><span style="color: #ff4932;">{{ row.nome|title}}</span></td>                
+            </tr>
+            <tr>
+                <td>CPF:</td> <td><span style="color: #ff4932;">{{ row.cpf|cpffilter}}</span></td>
+            </tr>
+            <tr>
+                <td>Data de Nascimento: </td> <td><span style="color: #ff4932;">{{ row.nascimento|format_strit_to_data}}</span></td>
+            </tr>
+        </table>
+    </div>
+    
+{% endblock %}

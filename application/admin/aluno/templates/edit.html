@@ -7,13 +7,23 @@
 
 {% block page %}
 <div class="container">
-    <form method="post">
-        
-        <p><input type="text" name="nome" value="{{ row.nome }}"></p>
-        <p><input type="text" name="cpf" value="{{ row.cpf }}"></p>
-        <p><input type="text" name="nascimento" value="{{ row.nascimento.strftime('%d/%m/%Y') }}"></p>
+    <form method="post" style="min-width: 400px;">        
+        <p><input type="text" name="nome" value="{{ row.nome|title }}" style="min-width: 300px;"></p>
+        <p><input type="text" name="cpf" value="{{ row.cpf|cpffilter }}" style="min-width: 70px ;" data-mask="000.000.000-00" data-mask-selecton-focus="true"></p>
+        <p><input type="date" name="nascimento" value="{{ row.nascimento }}"></p>
         <input type = "submit" value="Salvar">
         <a href="{{ url_for('aluno.index')}}" class="cancela">Retornar</a>
     </form>
 </div>
+{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <script src="{{ url_for('admin.static', filename='js/jquery.mask.min.js')}}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.cpf').mask('000.000.000-00');
+        });
+    </script>
 {% endblock %}
