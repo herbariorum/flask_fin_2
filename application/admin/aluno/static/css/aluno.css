@@ -34,3 +34,67 @@
 a {
     text-decoration: none;
 }
+
+/* FIM DATATABLES*/
+
+/* Form */
+.invalid-feedback {
+    display: block;
+}
+
+/* Fim Form */
+
+
+/* Form Delete */
+.delete {
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+}
+
+.form-delete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    width: 400px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+}
+
+.button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+ 
+}
+.button a{
+    margin-left: 20px;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+a.cancela:hover {
+    background: rgba(0, 0, 0, 0.08);;
+}
+/* Fim Form Delete*/
+
+
+/* VIEW */
+.info_view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+div.info_view h3, div.view_data {
+    margin-left: 30px;
+}
+
+
+
+/* FIM VIEW */

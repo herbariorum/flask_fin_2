@@ -9,6 +9,6 @@ def cpffilter(data):
 
 
 def format_strit_to_data(data):
-    ret = data.strftime('%d %m %Y')
+    ret = data.strftime('%d/%m/%Y')
     return ret
 

@@ -37,57 +37,45 @@ def index():
 
 @aluno.route('/new', methods=['GET','POST'])
 def new():
-    form = AlunoForm()
-
+    form = AlunoForm(request.form)
+    if request.method == 'POST' and form.validate():
+        msg = None
+        tipo = None
+        nome = form.nome.data        
+        ccpf = form.cpf.data        
+        checkCpfValido = cpf.validate(ccpf)
+        data_nasc = form.nascimento.data # 2022-05-30        
+        sexo = form.sexo.data # retorna um int
+        if not checkCpfValido:
+            msg = "Entre com um CPF válido"
+            tipo = 'warning' 
+        check_Cpf_Exist = Aluno.query.filter_by(cpf=Uteis.is_only_number(ccpf)).first()  
+        if check_Cpf_Exist:
+            msg = "Este CPF já está cadastrado no sistema para {}".format(check_Cpf_Exist.nome)
+            tipo = 'warning' 
+        if msg is None:
+            try:
+                aluno = Aluno(
+                    nome = nome,
+                    cpf = Uteis.is_only_number(ccpf),
+                    sexo= sexo,
+                    nascimento= data_nasc,
+                    created_on = date.today()
+                )
+                db.session.add(aluno)
+                db.session.commit()
+                msg = "O registro foi cadastrado com sucesso"
+                tipo = 'success'
+            except SQLAlchemyError as e:
+                db.session.rollback()
+                msg = "Não foi possível incluir o registro.\n O seguinte erro ocorreu: {}".format(e)
+                tipo = 'error'
+            else:
+                flash(msg, tipo)
+                return redirect(url_for('aluno.index'))
+        flash(msg, tipo)
     return render_template('new.html', title='Aluno::New', form=form)
 
-
-# sem o uso do wtforms
-# @aluno.route('/new', methods=['GET','POST'])
-# def new():
-#     if request.method == 'POST':    
-#         nome = request.form['nome']
-#         ccpf = request.form['cpf']
-#         checkCpfValido = cpf.validate(ccpf)
-#         data_str = request.form['nascimento']
-#         msg = None
-#         tipo = None
-#         if len(nome) <= 6:
-#             msg = "O *nome não pode ter menos que seis caracteres"
-#             tipo = 'warning'
-#         elif len(ccpf) < 11:
-#             msg = "O *cpf está em branco"
-#             tipo = 'warning'
-#         elif not checkCpfValido:
-#             msg = "Entre com um CPF válido"
-#             tipo = 'warning'   
-#         elif len(data_str) < 8:
-#             msg = "O *data nascimento está em branco"
-#             tipo = 'warning'            
-#         if msg is None:
-#             try:
-#                 y, m, d = data_str.split('-')
-#                 nascimento = datetime(int(y), int(m), int(d))
-#                 aluno = Aluno(
-#                     nome = nome,
-#                     cpf = Uteis.is_only_number(ccpf),
-#                     sexo = "MASCULINO",
-#                     nascimento = nascimento,
-#                     created_on = date.today()
-#                 )  
-#                 db.session.add(aluno)
-#                 db.session.commit()
-#                 msg = "O registro foi cadastrado com sucesso"
-#                 tipo = 'success'
-#             except SQLAlchemyError as e:
-#                 db.session.rollback()
-#                 msg = "Não foi possível incluir o registro.\n O seguinte erro ocorreu: {}".format(e)
-#                 tipo = 'error'
-#             else:
-#                 flash(msg, tipo)
-#                 return redirect(url_for('aluno.index'))        
-#         flash(msg, tipo)
-#     return render_template('new.html')
 
 # falta validar o cpf
 @aluno.route('<int:id>/edit', methods=['GET', 'POST'])

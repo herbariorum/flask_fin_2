@@ -8,10 +8,19 @@
 
 {% block page %}
 <div class="container delete">
-    <form action='{{ url_for('aluno.delete', id= id) }}' method="post">
-        Click SIM para confirmar
-        <input type = "submit" value="SIM">
-        <a href="{{ url_for('aluno.index')}}">Cancela</a>
+    <form action='{{ url_for('aluno.delete', id= id) }}' method="post" class="form-delete">
+        <div class="info">
+            <span class="material-icons">info</span>
+            Click  SIM para confirmar
+        </div>
+        <div class="button">
+            <button type="submit" class="btn btn-success d-flex justify-content-center align-content-between"> 
+                <i class="material-icons mr-1">check</i>
+                <span>SIM</span>
+            </button>
+            <a href="{{ url_for('aluno.index')}}" class="btn btn-default cancela">Cancela</a>
+        </div>        
+        
     </form>
 </div>
 {% endblock %}

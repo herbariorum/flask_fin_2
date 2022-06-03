@@ -1,0 +1,23 @@
+{% macro render_field_required(field, css, place) %}
+<div class="{{ css }}">
+    {{field.label(class='form-label')}}<span class="text-danger">*</span>
+    <div class="input-group has-validation">
+        {{ field(class='form-control', placeholder=place) }}
+        {% if field.errors %}
+            {% for error in field.errors  %}
+            <div class="invalid-feedback is-invalid" >{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endmacro %}
+
+
+{% macro render_field(field, css, place) %}
+<div class="{{ css }}">
+    {{field.label(class='form-label')}}</span>
+    <div class="input-group has-validation">
+        {{ field(class='form-control', placeholder= place) }}
+    </div>
+</div>
+{% endmacro %}
